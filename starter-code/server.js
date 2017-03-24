@@ -57,6 +57,7 @@ app.get('/articles', function(request, response) {
 
 // NOTE: Line 59 when a new article is created on the new page and the form is submited, the insert record method is called, an ajax post request is sent to the server with the new object. Line 60 querys the database to insert the object information. 61 to 64 are the sql Instructions and 66 - 71 are the arugments passed in. 74 logs complete, 77-8 would give and error on fail. #2-5.
 app.post('/articles', function(request, response) {
+  //client.query is a method of postgres(thing1=sql, thing2=array of data)
   client.query(
     `INSERT INTO
     articles(title, author, "authorUrl", category, "publishedOn", body)
