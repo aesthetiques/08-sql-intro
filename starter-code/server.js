@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO: Install and require the Node packages into your project, and ensure that it's now a new dependency in your package.json. DO NOT FORGET to run 'npm i'
+// TODO:DONE Install and require the Node packages into your project, and ensure that it's now a new dependency in your package.json. DO NOT FORGET to run 'npm i'
 const pg = require('pg'); // 3rd party package
 const fs = require('fs'); // native Node
 const express = require('express'); // 3rd party package
@@ -10,11 +10,11 @@ const bodyParser = require('body-parser'); // 3rd party package
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// TODO: Complete the connection string for the url that will connect to your local postgres database
+// TODO:DONE Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
 // Your url may require that it's composed of additional information including user and password
-// const conString = 'postgres://USER:PASSWORD@HOST:PORT/DBNAME';
-const conString = 'postgres://localhost:5432';
+const conString = 'postgres://william:test@localhost:5432/kilovolt';
+// const conString = 'postgres://localhost:5432';
 
 // REVIEW: Pass the conString to pg, which creates a new client object
 const client = new pg.Client(conString);
@@ -31,12 +31,12 @@ app.use(express.static('./public'));
 
 // REVIEW: Routes for requesting HTML resources
 
-// NOTE:
+// NOTE: Line 35: When they enter the url ending with forward slash it takes them to the index of the page. line 35 is 2 and 5 or in crud a read and update.
 app.get('/', function(request, response) {
   response.sendFile('index.html', {root: '.'});
 });
 
-// NOTE:
+// NOTE: When slash new is include in the url it sends the new.html also 2 and 5 of the process.
 app.get('/new', function(request, response) {
   response.sendFile('new.html', {root: '.'});
 });
@@ -55,7 +55,7 @@ app.get('/articles', function(request, response) {
   })
 });
 
-// NOTE:
+// NOTE: Line 59 when a new article is created on the new page and the form is submited, the insert record method is called, an ajax post request is sent to the server with the new object. Line 60 querys the database to insert the object information. 61 to 64 are the sql Instructions and 66 - 71 are the arugments passed in. 74 logs complete, 77-8 would give and error on fail.
 app.post('/articles', function(request, response) {
   client.query(
     `INSERT INTO
@@ -79,7 +79,7 @@ app.post('/articles', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE: line 83 is 2, line 84 is 3, 85-99 is updating the data in the database, 100 is 4 saying it's complete, 2-5 would happen on page refresh updating the article in the view.
 app.put('/articles/:id', function(request, response) {
   client.query(
     `UPDATE articles
