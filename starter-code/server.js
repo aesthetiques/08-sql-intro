@@ -105,7 +105,7 @@ app.put('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE:  109 when the user deletes an article an Ajax request isn't to query the database, the item matching the id is deleted and a response is sent back to termial. 2-5 would happen on refreshing the page.
 app.delete('/articles/:id', function(request, response) {
   client.query(
     `DELETE FROM articles WHERE article_id=$1;`,
