@@ -13,7 +13,7 @@ const app = express();
 // TODO:DONE Complete the connection string for the url that will connect to your local postgres database
 // Windows and Linux users; You should have retained the user/pw from the pre-work for this course.
 // Your url may require that it's composed of additional information including user and password
-const conString = 'postgres://william:test@localhost:5432/kilovolt';
+const conString = 'postgres://veslan:15e4tkmhkeih@localhost:5432/kilovolt';
 // const conString = 'postgres://localhost:5432';
 
 // REVIEW: Pass the conString to pg, which creates a new client object
@@ -55,7 +55,7 @@ app.get('/articles', function(request, response) {
   })
 });
 
-// NOTE: Line 59 when a new article is created on the new page and the form is submited, the insert record method is called, an ajax post request is sent to the server with the new object. Line 60 querys the database to insert the object information. 61 to 64 are the sql Instructions and 66 - 71 are the arugments passed in. 74 logs complete, 77-8 would give and error on fail.
+// NOTE: Line 59 when a new article is created on the new page and the form is submited, the insert record method is called, an ajax post request is sent to the server with the new object. Line 60 querys the database to insert the object information. 61 to 64 are the sql Instructions and 66 - 71 are the arugments passed in. 74 logs complete, 77-8 would give and error on fail. #2-5.
 app.post('/articles', function(request, response) {
   client.query(
     `INSERT INTO
@@ -119,7 +119,7 @@ app.delete('/articles/:id', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE: In line 123 when the user sends and AJAX delete request with the URL ending being /articles, it connects to this route. Then online 124 in postgres it queries to delete from articles. On line 125 the SQL commands delete the table from what it looks like. If this fails, it'll throw an error, otherwise it will send a response Delete complete to the console. This is 2-5.
 app.delete('/articles', function(request, response) {
   client.query(
     'DELETE FROM articles;'
@@ -132,7 +132,7 @@ app.delete('/articles', function(request, response) {
   });
 });
 
-// NOTE:
+// NOTE: calls the function loadDB();
 loadDB();
 
 app.listen(PORT, function() {
@@ -142,7 +142,7 @@ app.listen(PORT, function() {
 
 //////// ** DATABASE LOADER ** ////////
 ////////////////////////////////////////
-// NOTE:
+// NOTE: Line 147 is finding all of the articles in the SQL database, .then iterates over the hackerIpsum.json file, and inserts the articles into the articles from the database. 3 of the fullstack-diagram.
 function loadArticles() {
   client.query('SELECT COUNT(*) FROM articles')
   .then(result => {
@@ -162,7 +162,7 @@ function loadArticles() {
   })
 }
 
-// NOTE:
+// NOTE: checks to see if the table exists, if it isn't, it creates it and then calls loadArticles();, and if it fails, it console logs an error. 3 & 4.
 function loadDB() {
   client.query(`
     CREATE TABLE IF NOT EXISTS articles (
